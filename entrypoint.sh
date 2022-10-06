@@ -8,15 +8,17 @@ cat << EOF > /etc/xray/config.json
   "inbounds": [
     {
       "port": $PORT,
-      "protocol": "shadowsocks",
+      "protocol": "$PROTOCOL",
       "settings": {
-	     "clients": [
-		     {
-                "method": "aes-256-gcm",
-		        "password": "$PASSWORD"
-			 }
-            ],
-		  "network": "tcp,udp"
+        "decryption": "none",
+        "clients": [
+          {
+            "id": "$UUID"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws"
       }
     }
   ],

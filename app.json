@@ -3,9 +3,13 @@
     "description": "deploy to heroku",
     "keywords": [""],
     "env": {
-        "PASSWORD": {
-            "description": "password",
-            "value": "36cfc3de-ecfd-4752-ae6f-8f0f92035143"        
+        "PROTOCOL": {
+            "description": "choose vless or vmess",
+            "value": "vmess"
+        },
+        "UUID": {
+            "description": " UUID",
+            "value": "3097c963-bd57-4cb8-aaab-aaa5d9e2302f"        
         }
     },
     "repository": "https://github.com/shanedie/ss",
