@@ -10,9 +10,13 @@ cat << EOF > /etc/xray/config.json
       "port": $PORT,
       "protocol": "shadowsocks",
       "settings": {
-        "method": "aes-256-gcm",
-		"password": "$PASSWORD",
-		"network": "tcp,udp"
+	     "clients": [
+		     {
+                "method": "aes-256-gcm",
+		        "password": "$PASSWORD"
+			 }
+            ],
+		  "network": "tcp,udp"
       }
     }
   ],
