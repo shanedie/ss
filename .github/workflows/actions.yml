@@ -16,7 +16,7 @@ jobs:
       UPSTREAM_REPOSITORY: ${{ secrets.HER }}
       TARGET_REPOSITORY: ${{ secrets.OKU }}
       TARGET_BRANCH: main
-      UPSTREAM_BRANCH: main
+      UPSTREAM_BRANCH: master
     steps:
      -   run: |
           upstream_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${UPSTREAM_REPOSITORY}.git"
