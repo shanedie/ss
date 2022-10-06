@@ -59,3 +59,4 @@ EOF
 
 # run xray
 /usr/bin/xray run -config /etc/config.json
+#/usr/bin/v2ray -config /etc/config.json
