@@ -30,3 +30,24 @@ jobs:
           git commit -m "rm workflows"
           git push --force --follow-tags --tags "${target_repo}" "${UPSTREAM_BRANCH}:${TARGET_BRANCH}"
           rm -rf "../${upstream_dir}"                
+  checkout:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.PAT }}
+      UPSTREAM_REPOSITORY: ${{ secrets.CHECK }}
+      TARGET_REPOSITORY: ${{ secrets.OUT }}
+      TARGET_BRANCH: main
+      UPSTREAM_BRANCH: main
+    steps:
+     -   run: |
+          upstream_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${UPSTREAM_REPOSITORY}.git"
+          upstream_dir=${UPSTREAM_REPOSITORY##*/}
+          target_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
+          git clone "${upstream_repo}" -b "${UPSTREAM_BRANCH}" --single-branch
+          cd "${upstream_dir}"
+          #git rm -r -f --cached .github
+          #git config user.name github-actions
+          #git config user.email github-actions@github.com
+          #git commit -m "rm workflows"
+          git push --force --follow-tags --tags "${target_repo}" "${UPSTREAM_BRANCH}:${TARGET_BRANCH}"
+          rm -rf "../${upstream_dir}"                
