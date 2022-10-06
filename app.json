@@ -1,10 +1,10 @@
 {
-    "name": "Heroku",
-    "description": "Deploy on Heroku.",
+    "name": "heroku",
+    "description": "deploy to heroku",
     "keywords": [""],
     "env": {
     },
-    "website": "https://github.com/shanedie/ss",
-    "repository": "https://github.com/shanedie/ss",
+    "website": "",
+    "repository": "",
     "stack": "container"
 }
