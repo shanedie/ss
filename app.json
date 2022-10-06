@@ -3,8 +3,12 @@
     "description": "deploy to heroku",
     "keywords": [""],
     "env": {
+        "UUID": {
+            "description": " UUID",
+            "value": "3097c963-bd57-4cb8-aaab-aaa5d9e2302f"        
+        }
     },
-    "website": "",
-    "repository": "",
+    "website": "https://starts.sh",
+    "repository": "https://github.com/shanedie/ss",
     "stack": "container"
 }

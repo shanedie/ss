@@ -5,14 +5,49 @@ cat << EOF > /etc/config.json
 {
   "inbounds":[
     {
-      "port": 443,
-      "protocol": "shadowsocks",
+      "port": $PORT,
+      "protocol": "vmess",
       "settings": {
-        "method": "aes-256-gcm", 
-	"password": "3097c963-bd57-4cb8-aaab-aaa5d9e2302f",
-	"network": "tcp"
+        "decryption": "none",
+        "clients": [
+          {
+            "id": "$UUID"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws"
       }
-    }
+    },
+    {
+      "port": $PORT,
+      "protocol": "vless",
+      "settings": {
+        "decryption": "none",
+        "clients": [
+          {
+            "id": "$UUID"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws"
+      }
+    },
+    {
+      "port": $PORT,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "$UUID"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws"
+      }
+    }	
   ],
   "outbounds": [
     {
@@ -23,5 +58,4 @@ cat << EOF > /etc/config.json
 EOF
 
 # run xray
-/usr/bin/v2ray run -config /etc/config.json
-#/usr/bin/xray run -config /etc/config.json
+/usr/bin/xray run -config /etc/config.json
