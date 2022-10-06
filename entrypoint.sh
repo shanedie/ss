@@ -8,9 +8,9 @@ cat << EOF > /etc/xray/config.json
   "inbounds": [
     {
       "port": $PORT,
-      "protocol": "$PROTOCOL",
+      "protocol": "shadowsocks",
       "settings": {
-        "method": "2022-blake3-aes-128-gcm",
+        "method": "aes-256-gcm",
 		"password": "PASSWORD",
 		"network": "tcp,udp"
       }
