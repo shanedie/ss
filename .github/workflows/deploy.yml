@@ -1,8 +1,8 @@
 name: deploy
 
 on:
-  push:
-    branches: [ "main" ]
+  #push:
+    #branches: [ "main" ]
   schedule:
    - cron:  '0 18 * * 4'
 
@@ -63,5 +63,8 @@ jobs:
       env:
         HEROKU_APP_NAME: ${{ secrets.APP }}
     - name: Push to Heroku
-      run: git push heroku master
+      run: |
+        git add .
+        git commit -am "make it better"
+        git push heroku master
       
