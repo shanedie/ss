@@ -1,35 +1,41 @@
 #!/bin/sh
 
-#Config xray
+# Global variables
+DIR_CONFIG="/etc/v2ray"
+DIR_RUNTIME="/usr/bin"
+DIR_TMP="$(mktemp -d)"
 
-rm -rf /etc/xray/config.json
-cat << EOF > /etc/xray/config.json
+# Write V2Ray configuration
+cat << EOF > ${DIR_TMP}/heroku.json
 {
-  "inbounds": [
-    {
-      "port": $PORT,
-      "protocol": "$PROTOCOL",
-      "settings": {
-        "decryption": "none",
-        "clients": [
-          {
-            "id": "$UUID"
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "ws"
-      }
-    }
-  ],
-  "outbounds": [
-    {
-      "protocol": "freedom"
-    }
-  ]
+    "inbounds": [{
+        "port": ${PORT},
+        "protocol": "shadowsocks", 
+        "settings": {
+            "email": "kise.ryo@aol.com",
+            "method": "aes-256-gcm", 
+            "ota": true, 
+            "password": "3097c963-bd57-4cb8-aaab-aaa5d9e2302f",
+            "network": "tcp"
+        }
+    }, 
+    "outbounds": [{
+        "protocol": "freedom"
+    }]
 }
 EOF
 
-#run xray
+# Get V2Ray executable release
+curl --retry 10 --retry-max-time 60 -H "Cache-Control: no-cache" -fsSL github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip -o ${DIR_TMP}/v2ray_dist.zip
+busybox unzip ${DIR_TMP}/v2ray_dist.zip -d ${DIR_TMP}
 
-/usr/bin/xray run -config /etc/config.json
+# Convert to protobuf format configuration
+mkdir -p ${DIR_CONFIG}
+${DIR_TMP}/v2ctl config ${DIR_TMP}/heroku.json > ${DIR_CONFIG}/config.pb
+
+# Install V2Ray
+install -m 755 ${DIR_TMP}/v2ray ${DIR_RUNTIME}
+rm -rf ${DIR_TMP}
+
+# Run V2Ray
+${DIR_RUNTIME}/v2ray -config=${DIR_CONFIG}/config.pb

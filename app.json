@@ -1,17 +1,10 @@
 {
-    "name": "heroku",
-    "description": "deploy to heroku",
+    "name": "Heroku",
+    "description": "Deploy on Heroku.",
     "keywords": [""],
     "env": {
-        "PROTOCOL": {
-            "description": "choose vless or vmess",
-            "value": "vmess"
-        },
-        "UUID": {
-            "description": " UUID",
-            "value": "3097c963-bd57-4cb8-aaab-aaa5d9e2302f"        
-        }
     },
+    "website": "https://github.com/shanedie/ss",
     "repository": "https://github.com/shanedie/ss",
     "stack": "container"
 }
