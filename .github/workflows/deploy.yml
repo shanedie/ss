@@ -1,19 +1,22 @@
 name: DEPLOY
 
 on:
+  #push:
+    #branches: [ "main" ]
   schedule:
-   - cron:  '0 18 * * 4
-
-  workflow_dispatch:  
+    - cron:  '0 18 * * 4'
+  
+  workflow_dispatch: 
   
 jobs:
-  deploy:
+  heroku-deploy:
     runs-on: ubuntu-latest
     steps:
-    - use: shanedie/ckout@main
-    - use: shanedie/act@main
-      with:
-        heroku_api_key: ${{ secrets.KEY }}
-        heroku_app_name: ${{ secrets.APP }}
-        heroku_email: ${{ secrets.MAIL }}
+      - uses: shanedie/ckout@main
+      - uses: shanedie/act@main
+        with:
+          heroku_api_key: ${{ secrets.KEY }}
+          heroku_app_name: ${{ secrets.APP }}
+          heroku_email: ${{ secrets.MAIL }}
+
        
