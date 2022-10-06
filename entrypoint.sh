@@ -32,4 +32,4 @@ EOF
 
 #run xray
 
-xray -c /etc/xray/config.json
+/usr/bin/xray run -config /etc/config.json
